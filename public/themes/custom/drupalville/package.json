@@ -1,0 +1,20 @@
+{
+  "name": "drupalville",
+  "version": "1.0.0",
+  "description": "gulp dependencies of drupalville theme",
+  "main": "gulpfile.js",
+  "scripts": {
+    "postinstall": "find node_modules/ -name '*.info' -type f -delete"
+  },
+  "dependencies": {
+    "browser-sync": "^2.13.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sass-globbing": "0.0.2",
+    "gulp-uglify": "^1.5.4",
+    "jshint": "^2.9.2"
+  }
+}
