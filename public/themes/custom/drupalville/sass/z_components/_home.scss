@@ -1,0 +1,4 @@
+.layout-container {
+  background-color: $limegreen;
+  @include outer-container; /* from bourbon neat framework */
+}
