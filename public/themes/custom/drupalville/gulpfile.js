@@ -8,6 +8,9 @@ var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var globbing = require('gulp-sass-globbing');
 var browserSync = require('browser-sync').create();
+var bourbon = require('node-bourbon').includePaths;
+var neat = require('node-neat').includePaths;
+
 
 // Minify JS
 gulp.task('scripts', function() {
@@ -44,7 +47,10 @@ gulp.task('glob:sass', function() {
 gulp.task('sass', ['glob:sass'], function() {
   return gulp
     .src('sass/styles.scss')
-    .pipe(sass())
+    .pipe(sass({
+      includePaths: bourbon,
+      includePaths: neat
+    }))
     .pipe(gulp.dest('css'))
     .pipe(browserSync.reload({ stream: true })) // this is where the magic happens
     .pipe(notify({ message: 'Styles task complete, BrowserSync reloaded' }));
