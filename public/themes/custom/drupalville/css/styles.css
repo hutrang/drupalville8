@@ -1,4 +1,10 @@
 /* generated with gulp-sass-globbing */
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
 *,
 *:before,
 *:after {
@@ -21,6 +27,18 @@ a {
   color: #444;
   text-decoration: none; }
 
-.layout-container header {
-  background-color: hotpink;
+header {
+  background-color: #ed4bae;
+  /* variable declared in colors */
   height: 200px; }
+
+.layout-container {
+  background-color: #74c426;
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+  /* from bourbon neat framework */ }
+  .layout-container::after {
+    clear: both;
+    content: "";
+    display: table; }
