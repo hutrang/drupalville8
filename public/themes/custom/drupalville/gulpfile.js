@@ -10,7 +10,9 @@ var globbing = require('gulp-sass-globbing');
 var browserSync = require('browser-sync').create();
 var bourbon = require('node-bourbon').includePaths;
 var neat = require('node-neat').includePaths;
-
+var imagemin = require('gulp-imagemin');
+var watch = require('gulp-watch');
+var newer = require('gulp-newer');
 
 // Minify JS
 gulp.task('scripts', function() {
@@ -56,6 +58,26 @@ gulp.task('sass', ['glob:sass'], function() {
     .pipe(notify({ message: 'Styles task complete, BrowserSync reloaded' }));
 });
 
+// Optimize images
+gulp.task('imagemin', function() {
+  return gulp
+    .src('images/src/*')
+    .pipe(newer('images/dist/'))
+    .pipe(imagemin({
+      optimizationLevel: 5,
+      progressive: true,
+      interlaced: true
+    }))
+    .pipe(gulp.dest('images/dist/'))
+    .pipe(notify({ message: 'Images optimized' }));
+});
+
+// Watch images for changes
+gulp.task('imagewatch', ['imagemin'], function() {
+  return watch('images/src/*', function() {
+    gulp.start('imagemin');
+  });
+});
 
 // Watch
 gulp.task('watch', function() {
@@ -74,6 +96,6 @@ gulp.task('serve', function() {
 });
 
 // Default task: command of 'gulp'
-gulp.task('default', ['serve'], function() {
-  gulp.start(['sass'], ['scripts']);
+gulp.task('default', ['clean', 'serve'], function() {
+  gulp.start(['sass'], ['scripts'], ['imagewatch']);
 });
